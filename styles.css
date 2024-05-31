@@ -1,6 +1,6 @@
 body {
-	/* width: 100%; */
 	font-family: Arial, Helvetica, sans-serif;
+	padding-bottom: 180px;
 }
 ul,li {
 	list-style: none;
@@ -12,7 +12,6 @@ li {
 html,
 body {
 	margin: 0;
-	padding: 0;
 }
 code {
 	background-color: #f5f5f5;
@@ -46,9 +45,11 @@ code {
 
 main {
 	min-height: 70vh;
-	padding-bottom: 120px;
 }
 
 button {
+	font-size: 18px;
 	padding: 4px 6px;
+	border-radius: 4px;
+	-webkit-appearance: none;
 }
