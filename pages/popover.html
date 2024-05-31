@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Popover API</title>
+	<link href="../styles.css" rel="stylesheet" />
+	<style>
+		.center {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.closeBtn {
+			position: absolute;
+			right: 5px;
+			top: 5px;
+		}
+
+		.popoverContent {
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+			position: relative;
+			padding: 15px;
+			margin: 10px;
+			min-width: 320px;
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+			border: none;
+			border-radius: 6px;
+		}
+
+		.popoverContent:popover-open {
+			position: absolute;
+			inset: unset;
+			right: 5px;
+			bottom: 5px;
+		}
+
+		.modalContent {
+			
+			padding: 15px;
+			/* margin: 10px; */
+			min-width: 320px;
+			box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+			border: none;
+			border-radius: 6px;
+		}
+		.modalContent::backdrop {
+			backdrop-filter: blur(2px);
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+	</style>
+
+</head>
+
+<body>
+	<header class="container">
+		<a href="/">
+			<h1>Examples of native HTML, Web API features</h1>
+		</a>
+
+		<a href="https://github.com/artemshar/html" class="logo" target="_blank">
+			<img src="/images/github-mark.svg" alt="github logo">
+		</a>
+		<hr>
+	</header>
+
+	<main class="container">
+		<h2>Popover API</h2>
+		<p>Since April 2024, this feature works across the latest devices and browser versions. This feature might not work
+			in older devices or browsers.</p>
+
+		<div class="playground">
+			<div>
+				<h3>Non-modal</h3>
+				<p>meaning that the rest of the page can be interacted with while the popover is being shown.</p>
+				<div class="center">
+					<button popovertarget="mypopover">Toggle popover</button>
+					<div id="mypopover" popover="manual" class="popoverContent">
+						<div>Popover content</div>
+						<p>HTML is powerful and amazing!</p>
+						<p>You still can interract with elements behind the popover</p>
+						<button popovertargetaction="hide" popovertarget="mypopover" class="closeBtn">x</button>
+					</div>
+				</div>
+			</div>
+
+			<br><br><br><br>
+
+			<div>
+				<h3>Modal (with &lt;dialog&gt;)</h3>
+				<p>modal, meaning that while a popover is being shown, the rest of the page is rendered non-interactive until
+					the popover is actioned in some way (for example an important choice is made).</p>
+				<div class="center">
+					<button id="btnShowModal">Open modal / dialog</button>
+					<dialog close id="mymodal" class="modalContent">
+						<p>Greetings, one and all!</p>
+						<p>You  <b>can't</b> interract with elements behind the modal - that's difference</p>
+						<form method="dialog">
+							<button id="btnCloseModal">OK</button>
+						</form>
+					</dialog>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer class="footer container">
+		<h3>Links:</h3>
+		<div>
+			<ul>
+				<li>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API">MDN / Web/API/Popover_API</a>
+				</li>
+				<li>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using">MDN /
+						Web/API/Popover_API/Using</a>
+				</li>
+			</ul>
+
+
+		</div>
+	</footer>
+	<script>
+		const dialog = document.getElementById("mymodal");
+		const showButton = document.getElementById("btnShowModal");
+		const closeButton = document.getElementById("btnCloseModal");
+
+		// "Show the dialog" button opens the dialog modally
+		showButton.addEventListener("click", () => {
+			dialog.showModal();
+		});
+
+		// "Close" button closes the dialog
+		closeButton.addEventListener("click", () => {
+			dialog.close();
+		});
+	</script>
+</body>
+
+</html>

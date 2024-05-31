@@ -1,0 +1,47 @@
+body {
+	/* width: 100%; */
+	font-family: Arial, Helvetica, sans-serif;
+}
+ul,li {
+	list-style: none;
+	padding: 0;
+}
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+code {
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	padding: 10px;
+	font-family: monospace;
+	white-space: pre;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 900px;
+	padding: 10px 15px;
+	/* text-align: center; */
+}
+
+.logo {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+}
+.logo img {
+	width: 30px;
+	height: 30px;
+}
+
+.playground {
+
+	padding-top: 20px;
+	height: 100%;
+}
+
+main {
+	min-height: 70vh;
+}
