@@ -29,12 +29,11 @@
 			box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 			border: none;
 			border-radius: 6px;
-			z-index: 2;
+			z-index: 10;
 			background-color: #fff;
 		}
 
 		.popoverContent:popover-open {
-			position: fixed;
 			inset: unset;
 			right: 5px;
 			bottom: 5px;
@@ -83,7 +82,7 @@
 						<div>Popover content</div>
 						<p>HTML is powerful and amazing!</p>
 						<p>You still can interract with elements behind the popover</p>
-						<button popovertargetaction="hide" popovertarget="mypopover" class="closeBtn">x</button>
+						<button popovertargetaction="hide" onclick="document.getElementById('mypopover').hidePopover()" popovertarget="mypopover" class="closeBtn">x</button>
 					</div>
 				</div>
 			</div>
