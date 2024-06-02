@@ -19,6 +19,7 @@ code pre {
 	padding: 10px;
 	font-family: monospace;
 	white-space: pre;
+	text-wrap: wrap;
 }
 
 .container {
