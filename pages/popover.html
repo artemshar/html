@@ -79,7 +79,7 @@
 				<p>meaning that the rest of the page can be interacted with while the popover is being shown.</p>
 				<div class="center">
 					<button popovertarget="popoverAuto">Toggle popover="auto"</button>
-					<div id="popoverAuto" popover="auto" class="popoverContent" style="top: 10px;">
+					<div id="popoverAuto" popover="auto" class="popoverContent" style="top: 40px;">
 						<div>Popover="auto" content</div>
 						<p>You still can interract with elements behind the popover.</p>
 						<p>If you press ESC or Enter, modal will close.</p>
@@ -102,7 +102,7 @@
 						<p>But you should control closing this modal manually.</p>
 						<button popovertargetaction="hide" onclick="document.getElementById('popoverManual').hidePopover()"
 							popovertarget="popoverManual" class="closeBtn">close</button>
-						
+
 					</div>
 				</div>
 			</div>
@@ -114,12 +114,16 @@
 				<p>modal, meaning that while a popover is being shown, the rest of the page is rendered non-interactive until
 					the popover is actioned in some way (for example an important choice is made).</p>
 				<div class="center">
-					<button id="btnShowModal">Open modal / dialog</button>
+					<button id="btnShowModal" onclick="document.getElementById('mymodal').showModal()">Open modal /
+						dialog</button>
+					<!-- close attribute is default state -->
 					<dialog close id="mymodal" class="modalContent">
 						<p>Greetings, one and all! HTML is powerful and amazing!</p>
-						<p>You <b>can't</b> interact with elements behind the modal - that's the difference between <b>popover</b> only.</p>
+						<p>You <b>can't</b> interact with elements behind the modal - that's the difference between <b>popover</b>
+							only.</p>
+						<!-- To make it works you have 2 options: 1) add form with method="doalog" 2) bind onclick with close() method of dialog element -->
 						<form method="dialog">
-							<button id="btnCloseModal">OK</button>
+							<button id="btnCloseModal" onclick="document.getElementById('mymodal').close()">OK</button>
 						</form>
 					</dialog>
 				</div>
@@ -145,21 +149,6 @@
 			</ul>
 		</div>
 	</footer>
-	<script>
-		const dialog = document.getElementById("mymodal");
-		const showButton = document.getElementById("btnShowModal");
-		const closeButton = document.getElementById("btnCloseModal");
-
-		// "Show the dialog" button opens the dialog modally
-		showButton.addEventListener("click", () => {
-			dialog.showModal();
-		});
-
-		// "Close" button closes the dialog
-		closeButton.addEventListener("click", () => {
-			dialog.close();
-		});
-	</script>
 </body>
 
 </html>
