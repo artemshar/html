@@ -140,39 +140,65 @@
 		<div>
 			<ul>
 				<li>
-					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API" target="_blank">MDN /
-						Web/API/Popover_API</a>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API" target="_blank">Popover API</a>
 				</li>
 				<li>
-					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using" target="_blank">MDN /
-						Web/API/Popover_API/Using</a>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using" target="_blank">Popover API -
+						Using</a>
 				</li>
 				<li>
-					<a href="https://mdn.github.io/dom-examples/popover-api/" target="_blank">More examples of Popover API</a>
+					<a href="https://mdn.github.io/dom-examples/popover-api/" target="_blank">More examples</a>
+				</li>
+				<li>
+					<a href="https://caniuse.com/?search=popover" target="_blank">caniuse.com/?search=popover</a>
 				</li>
 			</ul>
 		</div>
 	</footer>
 	<script>
+		// check user browsers
+		// see https://caniuse.com/?search=popover
 		const parser = new UAParser();
 		const result = parser.getResult()
 
 		let isNewBrowser = false;
+		let isIOS = false;
+		let checkIOS = false;
 
-		// check https://caniuse.com/?search=popover
-		if (result.engine.name === 'Blink') {
-			getMajorVersion(result.engine.version) >= 122 ? isNewBrowser = true : isNewBrowser = false
+		// check iOS
+		if (result.os.name === 'iOS') {
+			isIOS = true;
+			getMajorVersion(result.os.version) >= 17 ? checkIOS = true : checkIOS = false
+		} else {
+			checkIOS = true;
 		}
 
-		if (result.engine.name === 'Webkit') {
-			getMajorVersion(result.engine.version) >= 17 ? isNewBrowser = true : isNewBrowser = false
+		// check popular browsers
+		switch (result.browser.name) {
+			case 'Chrome':
+			case 'Edge':
+				isNewBrowser = getMajorVersion(result.browser.version) >= 114;
+				break;
+			case 'Opera':
+				isNewBrowser = getMajorVersion(result.browser.version) >= 100;
+				break;
+			case 'Firefox':
+				isNewBrowser = getMajorVersion(result.browser.version) >= 125;
+				break;
+			case 'Safari':
+				isNewBrowser = getMajorVersion(result.browser.version) >= 17;
+				break;
+			default:
+				isNewBrowser = false;
 		}
+
 
 		console.log('User Agent:', result)
 		const playgroundContainer = document.getElementsByClassName('playground')[0];
-		if (!isNewBrowser) {
+
+		if (!isNewBrowser || !checkIOS) {
 			playgroundContainer.innerHTML = "";
-			playgroundContainer.append("*** Your browser don't support this feature, please update your browser. ***");
+			playgroundContainer.append("*** Your can don't support this feature, please update your browser. ***");
 
 			// Crazy way to break new string :D
 			for (let i = 0; i < 3; i++) {
