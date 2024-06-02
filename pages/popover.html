@@ -73,17 +73,36 @@
 			in older devices or browsers.</p>
 
 		<div class="playground">
+
 			<div>
-				<h3>Non-modal</h3>
+				<h3>Non-modal popover="auto"</h3>
 				<p>meaning that the rest of the page can be interacted with while the popover is being shown.</p>
 				<div class="center">
-					<button popovertarget="mypopover">Toggle popover</button>
-					<div id="mypopover" popover="manual" class="popoverContent">
-						<div>Popover content</div>
-						<p>HTML is powerful and amazing!</p>
-						<p>You still can interract with elements behind the popover</p>
-						<button popovertargetaction="hide" onclick="document.getElementById('mypopover').hidePopover()"
-							popovertarget="mypopover" class="closeBtn">close</button>
+					<button popovertarget="popoverAuto">Toggle popover="auto"</button>
+					<div id="popoverAuto" popover="auto" class="popoverContent" style="top: 10px;">
+						<div>Popover="auto" content</div>
+						<p>You still can interract with elements behind the popover.</p>
+						<p>If you press ESC or Enter, modal will close.</p>
+						<button popovertargetaction="hide" onclick="document.getElementById('popoverAuto').hidePopover()"
+							popovertarget="popoverAuto" class="closeBtn">close</button>
+					</div>
+				</div>
+			</div>
+
+			<br><br><br><br>
+
+			<div>
+				<h3>Non-modal popover="manual"</h3>
+				<p>meaning that the rest of the page can be interacted with while the popover is being shown.</p>
+				<div class="center">
+					<button popovertarget="popoverManual">Toggle popover="manual"</button>
+					<div id="popoverManual" popover="manual" class="popoverContent">
+						<div>Popover="manual" content</div>
+						<p>You still can interract with elements behind the popover.</p>
+						<p>But you should control closing this modal manually.</p>
+						<button popovertargetaction="hide" onclick="document.getElementById('popoverManual').hidePopover()"
+							popovertarget="popoverManual" class="closeBtn">close</button>
+						
 					</div>
 				</div>
 			</div>
@@ -97,8 +116,8 @@
 				<div class="center">
 					<button id="btnShowModal">Open modal / dialog</button>
 					<dialog close id="mymodal" class="modalContent">
-						<p>Greetings, one and all!</p>
-						<p>You <b>can't</b> interact with elements behind the modal - that's the difference.</p>
+						<p>Greetings, one and all! HTML is powerful and amazing!</p>
+						<p>You <b>can't</b> interact with elements behind the modal - that's the difference between <b>popover</b> only.</p>
 						<form method="dialog">
 							<button id="btnCloseModal">OK</button>
 						</form>
