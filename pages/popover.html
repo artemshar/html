@@ -21,21 +21,24 @@
 
 		.popoverContent {
 			position: fixed;
-			bottom: 10px;
-			right: 10px;
 			padding: 15px;
 			margin: 10px;
 			min-width: 320px;
 			box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-			border: none;
+			border: 1px solid rgba(20, 20, 20, 0.5);
 			border-radius: 6px;
 			z-index: 10;
 			background-color: #fff;
+			inset: unset;
 		}
 
-		.popoverContent:popover-open {
-			inset: unset;
-			right: 5px;
+		.popoverContent.top:popover-open {
+			right: 10px;
+			top: 40px;
+		}
+
+		.popoverContent.bottom:popover-open {
+			right: 10px;
 			bottom: 5px;
 		}
 
@@ -52,7 +55,8 @@
 			background-color: rgba(0, 0, 0, 0.2);
 		}
 	</style>
-
+	<script src="../tools/ua-parser.min.js"></script>
+	<script src="../tools/getMajorVersion.js"></script>
 </head>
 
 <body>
@@ -73,13 +77,12 @@
 			in older devices or browsers.</p>
 
 		<div class="playground">
-
 			<div>
 				<h3>Non-modal popover="auto"</h3>
 				<p>meaning that the rest of the page can be interacted with while the popover is being shown.</p>
 				<div class="center">
 					<button popovertarget="popoverAuto">Toggle popover="auto"</button>
-					<div id="popoverAuto" popover="auto" class="popoverContent" style="top: 40px;">
+					<div id="popoverAuto" popover="auto" class="popoverContent top">
 						<div>Popover="auto" content</div>
 						<p>You still can interract with elements behind the popover.</p>
 						<p>If you press ESC or Enter, modal will close.</p>
@@ -96,7 +99,7 @@
 				<p>meaning that the rest of the page can be interacted with while the popover is being shown.</p>
 				<div class="center">
 					<button popovertarget="popoverManual">Toggle popover="manual"</button>
-					<div id="popoverManual" popover="manual" class="popoverContent">
+					<div id="popoverManual" popover="manual" class="popoverContent bottom">
 						<div>Popover="manual" content</div>
 						<p>You still can interract with elements behind the popover.</p>
 						<p>But you should control closing this modal manually.</p>
@@ -129,6 +132,7 @@
 				</div>
 			</div>
 		</div>
+
 	</main>
 
 	<footer class="footer container">
@@ -149,6 +153,40 @@
 			</ul>
 		</div>
 	</footer>
+	<script>
+		const parser = new UAParser();
+		const result = parser.getResult()
+
+		let isNewBrowser = false;
+
+		// check https://caniuse.com/?search=popover
+		if (result.engine.name === 'Blink') {
+			getMajorVersion(result.engine.version) >= 122 ? isNewBrowser = true : isNewBrowser = false
+		}
+
+		if (result.engine.name === 'Webkit') {
+			getMajorVersion(result.engine.version) >= 17 ? isNewBrowser = true : isNewBrowser = false
+		}
+
+		console.log('User Agent:', result)
+		const playgroundContainer = document.getElementsByClassName('playground')[0];
+		if (!isNewBrowser) {
+			playgroundContainer.innerHTML = "";
+			playgroundContainer.append("*** Your browser don't support this feature, please update your browser. ***");
+
+			// Crazy way to break new string :D
+			for (let i = 0; i < 3; i++) {
+				const br = document.createElement("br");
+				playgroundContainer.append(br);
+			}
+
+			const code = document.createElement('code');
+			const pre = document.createElement('pre');
+			pre.append(`Your browser info (userAgent): ${JSON.stringify(result, null, 2)}`);
+			code.append(pre);
+			playgroundContainer.append(code);
+		}
+	</script>
 </body>
 
 </html>
