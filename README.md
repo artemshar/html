@@ -1,3 +1,3 @@
-# html
+# Web API's
 
-Examples of native HTML, Web API features
+Web API's features, examples
